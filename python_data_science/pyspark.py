@@ -1,4 +1,3 @@
-from unidecode import unidecode
 from datetime import datetime
 
 import pandas as pd
