@@ -54,8 +54,8 @@ df['Estado'] = df['Estado'].apply(remove_caracter_especial)
 df.drop(columns=['temp'], inplace=True)
 
 # convertendo dataframe em um arquivo '.parquet'
-# df.to_parquet('df.parquet.gzip', compression='gzip')
-# pd.read_parquet('df.parquet.gzip')
+df.to_parquet('df.parquet.gzip', compression='gzip')
+pd.read_parquet('df.parquet.gzip')
 
 print(df)
 
