@@ -1,2 +1,2 @@
 # Python
-Exemplos de desenvolvimento em Python e Python para Data Science e Machine Learning.
+Exemplos de desenvolvimento em Python e Python para Data Science , Pandas DataFrames, Machine Learning e PySpark.
