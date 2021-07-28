@@ -1,2 +1,2 @@
 # Python
-Curso com Exercicios de python e Python para Data Science e Machine Learning.
+Exemplos de desenvolvimento em Python e Python para Data Science e Machine Learning.
