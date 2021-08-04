@@ -26,8 +26,8 @@ if __name__ == "__main__":
 
     df.printSchema()
 
-    new_df = (df.withColumn("soma_novos_e_acumulados",F.col("casosNovos")+F.col("casosAcumulados")).
-              withColumn("coluna_personalizada",F.lit("O Valor da Coluna"))
+    new_df = (df.withColumn("soma_novos_e_acumulados", F.col("casosNovos") + F.col("casosAcumulados")).
+              withColumn("coluna_personalizada", F.lit("O Valor da Coluna"))
               )
     new_df_cast = new_df.selectExpr("cast(casosNovos as string)")
     new_df_cast.printSchema()
