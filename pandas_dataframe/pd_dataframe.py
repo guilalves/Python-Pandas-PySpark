@@ -2,11 +2,15 @@ from datetime import datetime
 
 import pandas as pd
 
+"""
+Caso 1 – Adicionar 1 coluna com um contador sequencial por Município e ordenar por Estado.
+Caso 2 - Adicionar 1 coluna com a Idade em anos e na coluna cod_cliente formatar o campo com 3 posições a esquerda completando com “0”. 
+Caso 3 - Adicionar 1 coluna com a data de atualização, preenchendo com a data do dia da execução e retirar os caracteres especiais do campo Estado.
+converter o arquivo para (.parquet)
+"""
+
 # variaveis
 data_atual = datetime.now()
-data_atualizacao = data_atual.strftime('%m/%d/%Y')
-data = data_atual.strftime('%Y')
-data = int(data)
 
 # data frame
 base = {
@@ -31,8 +35,7 @@ df['temp'] = df['data_nasc']
 # adicionando uma nova coluna de idade em anos
 df['data_nasc'] = pd.to_datetime(df.data_nasc)
 df['data_nasc'] = df['data_nasc'].dt.strftime('%Y')
-df['data_nasc'] = df['data_nasc'].astype(int)
-df['idade'] = data - df['data_nasc']
+df['idade'] = int(data_atual.strftime('%Y')) - df['data_nasc'].astype(int)
 
 df['data_nasc'] = df['temp']
 
@@ -40,7 +43,7 @@ df['data_nasc'] = df['temp']
 df["cod_cliente"] = df["cod_cliente"].apply(lambda x: x.zfill(4))
 
 # adicionando nova coluna data de atualizacao
-df['data atualizada'] = data_atualizacao
+df['data atualizada'] = data_atual.strftime('%d/%m/%Y - %H:%M:%S')
 
 # removendo caracteres especiais do campo Estado
 def remove_caracter_especial(columns):
@@ -48,6 +51,9 @@ def remove_caracter_especial(columns):
    return columns
 
 df['Estado'] = df['Estado'].apply(remove_caracter_especial)
+
+# data execução
+df['data execucao'] = data_atual.strftime('%d/%m/%Y')
 
 # Excluindo a coluna temporaria
 df.drop(columns=['temp'], inplace=True)
