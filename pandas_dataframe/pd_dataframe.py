@@ -2,32 +2,32 @@ from datetime import datetime
 
 import pandas as pd
 
+SEPARATOR = ('-=-' * 35)
 """
-Caso 1 – Adicionar 1 coluna com um contador sequencial por Município e ordenar por Estado.
+Caso 1 – Adicionar 1 coluna com um contador sequencial por Município e ordenar por estado.
 Caso 2 - Adicionar 1 coluna com a Idade em anos e na coluna cod_cliente formatar o campo com 3 posições a esquerda completando com “0”. 
-Caso 3 - Adicionar 1 coluna com a data de atualização, preenchendo com a data do dia da execução e retirar os caracteres especiais do campo Estado.
+Caso 3 - Adicionar 1 coluna com a data de atualização, preenchendo com a data do dia da execução e retirar os caracteres especiais do campo estado.
 converter o arquivo para (.parquet)
 """
 
-# variaveis
 data_atual = datetime.now()
 
 # data frame
 base = {
     'cod_cliente':['1', '2', '3', '4', '5', '6'],
-     'Nome':['José', 'Igor', 'Leonardo', 'Humberto', 'Isaias', 'Lucas'],
-     'Municipio':['Anápolis', 'Anápolis', 'Anápolis', 'Pato Branco', 'Pato Branco', 'Taua'],
-     'Estado':['São Paulo', 'São Paulo', 'São Paulo', 'Rio Grande do Sul', 'Rio Grande do Sul', 'Ceará'],
+     'nome':['José', 'Igor', 'Leonardo', 'Humberto', 'Isaias', 'Lucas'],
+     'municipio':['Anápolis', 'Anápolis', 'Anápolis', 'Pato Branco', 'Pato Branco', 'Taua'],
+     'estado':['São Paulo', 'São Paulo', 'São Paulo', 'Rio Grande do Sul', 'Rio Grande do Sul', 'Ceará'],
      'data_nasc':['01-09-1900', '11-09-1977', '11-09-1977', '13-11-1964', '07-07-2002', '05-09-1984'],
      }
 df = pd.DataFrame(base)
 
 # contador sequencial
-c = df['Municipio'].value_counts().to_frame('count')
+c = df['municipio'].value_counts().to_frame('count')
 new_df = pd.DataFrame(c)
 
-# ordenando por Estado
-df.sort_values(by='Estado', inplace=True)
+# ordenando por estado
+df.sort_values(by='estado', inplace=True)
 
 # coluna temporária
 df['temp'] = df['data_nasc']
@@ -43,17 +43,17 @@ df['data_nasc'] = df['temp']
 df["cod_cliente"] = df["cod_cliente"].apply(lambda x: x.zfill(4))
 
 # adicionando nova coluna data de atualizacao
-df['data atualizada'] = data_atual.strftime('%d/%m/%Y - %H:%M:%S')
+df['data_atualizacao'] = data_atual.strftime('%d/%m/%Y - %H:%M:%S')
 
-# removendo caracteres especiais do campo Estado
+# removendo caracteres especiais do campo estado
 def remove_caracter_especial(columns):
    columns = columns.replace('á', 'a').replace('ã', 'a')
    return columns
 
-df['Estado'] = df['Estado'].apply(remove_caracter_especial)
+df['estado'] = df['estado'].apply(remove_caracter_especial)
 
 # data execução
-df['data execucao'] = data_atual.strftime('%d/%m/%Y')
+df['dia_execucao'] = data_atual.strftime('%d/%m/%Y')
 
 # Excluindo a coluna temporaria
 df.drop(columns=['temp'], inplace=True)
@@ -63,5 +63,5 @@ df.drop(columns=['temp'], inplace=True)
 # pd.read_parquet('df.parquet.gzip')
 
 print(df)
-
+print(SEPARATOR)
 print(new_df)
