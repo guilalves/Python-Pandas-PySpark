@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 # from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
+
 if __name__ == "__main__":
 
     spark = (SparkSession.builder

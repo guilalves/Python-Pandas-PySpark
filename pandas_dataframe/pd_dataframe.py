@@ -37,7 +37,7 @@ df['idade'] = data - df['data_nasc']
 df['data_nasc'] = df['temp']
 
 # formatando o campo com 0 a esquerda
-df["cod_cliente"] = df["cod_cliente"].apply(lambda x: x.zfill(3))
+df["cod_cliente"] = df["cod_cliente"].apply(lambda x: x.zfill(4))
 
 # adicionando nova coluna data de atualizacao
 df['data atualizada'] = data_atualizacao
@@ -53,10 +53,9 @@ df['Estado'] = df['Estado'].apply(remove_caracter_especial)
 df.drop(columns=['temp'], inplace=True)
 
 # convertendo dataframe em um arquivo '.parquet'
-df.to_parquet('df.parquet.gzip', compression='gzip')
-pd.read_parquet('df.parquet.gzip')
+# df.to_parquet('df.parquet.gzip', compression='gzip')
+# pd.read_parquet('df.parquet.gzip')
 
 print(df)
 
-# Contador sequencial
 print(new_df)

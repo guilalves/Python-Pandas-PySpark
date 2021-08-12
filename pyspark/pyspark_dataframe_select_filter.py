@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     # df.printSchema()
 
-    # df.select(F.col("regiao"),F.col("estado"),F.col("casosNovos")).filter(F.col("regiao") == "Norte").show(10)
+    df.select(F.col("regiao"),F.col("estado"),F.col("casosNovos")).filter(F.col("regiao") == "Norte").show(10)
     # df.select(F.col("regiao"), F.col("estado"), F.col("casosNovos")).filter(df.regiao == "Norte").show(10)
     # df.select(F.col("regiao"), F.col("estado"), F.col("casosNovos")).filter("regiao = 'Norte'").show(10)
 
