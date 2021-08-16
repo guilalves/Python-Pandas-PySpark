@@ -35,7 +35,7 @@ schema = (StructType([
 df = spark.createDataFrame(data=data, schema=schema)
 
 # Contador sequencial por municipio
-df.groupBy('municipio').count().sort('municipio', ascending=False).show()
+df.groupBy('municipio').count().sort('municipio', ascending=True).show(truncate=False)
 
 # Ordenando a coluna estado
 df = df.orderBy('estado')
