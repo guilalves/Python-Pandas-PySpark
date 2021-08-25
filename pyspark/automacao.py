@@ -41,17 +41,17 @@ df.groupBy('municipio').count().sort('municipio', ascending=True).show(truncate=
 df = df.orderBy('estado')
 
 # Adicionando uma coluna nova de idade em anos
-df = df.withColumn('idade', F.date_format(F.current_timestamp(), "yyyy").cast('integer') \
+df = df.withColumn('idade', F.date_format(F.current_timestamp(), 'yyyy').cast('integer') \
                    - F.substring(F.col('data_nasc'), 7, 4).cast('integer'))
 
 # Adicionando 0 a esquerda na coluna cod_cliente
 df = df.withColumn('cod_cliente', F.lpad(df.cod_cliente, 4, '0'))
 
 # Data atualização
-df = df.withColumn('data_atualizacao', F.date_format(F.current_timestamp(), "dd-MM-yyyy | HH:mm:ss"))
+df = df.withColumn('data_atualizacao', F.date_format(F.current_timestamp(), 'dd-MM-yyyy | HH:mm:ss'))
 
 # data de execução
-df = df.withColumn('data_execucao', F.date_format(F.current_timestamp(), "dd-MM-yyyy"))
+df = df.withColumn('data_execucao', F.date_format(F.current_timestamp(), 'dd-MM-yyyy'))
 
 # removendo caracteres especiais da coluna estado
 df = df.withColumn('estado', F.regexp_replace('estado', 'á', 'a') \
